@@ -13,3 +13,7 @@ src/main/resources/docs/
 *.iml
 bin/
 
+.claude/
+
+# Generated scratch output (e.g. visual-diff HTML)
+_temp/
