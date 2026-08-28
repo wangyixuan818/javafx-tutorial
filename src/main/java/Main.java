@@ -17,6 +17,8 @@ public class Main extends Application {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private final Duke duke = new Duke();
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -79,11 +81,16 @@ public class Main extends Application {
     }
 
     /**
-     * Creates a dialog box containing the user input, appends it to the dialog
-     * container, and clears the user input field.
+     * Appends a dialog box for the user's input and one for Duke's response to
+     * the dialog container, then clears the user input field.
      */
     private void handleUserInput() {
-        dialogContainer.getChildren().addAll(new DialogBox(userInput.getText(), userImage));
+        String userText = userInput.getText();
+        String dukeText = duke.getResponse(userText);
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, userImage),
+                new DialogBox(dukeText, dukeImage)
+        );
         userInput.clear();
     }
 }
