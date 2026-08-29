@@ -49,6 +49,27 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Adds a style class to the dialog label based on the type of command issued.
+     *
+     * @param commandType The simple name of the command that produced this response.
+     */
+    private void changeDialogStyle(String commandType) {
+        switch (commandType) {
+        case "AddCommand":
+            dialog.getStyleClass().add("add-label");
+            break;
+        case "ChangeMarkCommand":
+            dialog.getStyleClass().add("marked-label");
+            break;
+        case "DeleteCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        default:
+            // Do nothing
+        }
+    }
+
+    /**
      * Returns a dialog box representing a message from the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -57,11 +78,13 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a dialog box representing a message from Duke, flipped so it is
-     * visually distinct from the user's messages.
+     * visually distinct from the user's messages and styled according to the
+     * command that produced the response.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, String commandType) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
     }
 }
